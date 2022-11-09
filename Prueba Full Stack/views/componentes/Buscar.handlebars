@@ -1,0 +1,30 @@
+<script>
+    const buscar = document.getElementById("buscar")
+    let tbody = document.getElementById("cuerpo");
+//    let operaciones = [];
+
+    buscar.addEventListener("click", async (e) => {
+    e.preventDefault()
+
+    try {
+      const response = await axios.get('/buscar'  )
+    let  operaciones = response.data;
+     tbody.innerHTML = "";
+      operaciones.forEach((c, i) => {
+        tbody.innerHTML += `
+        <tr>
+          <td>${c.id}</td>
+          <td>${c.fecha_hora}</td>
+          <td>${c.monto}</td>
+          <td>${c.monedaorigen}</td>
+          <td>${c.fechaconv}</td>
+          <td>${c.monedadestino}</td>
+          <td>
+        </tr>`;
+      });
+    } catch (error) {
+console.error(error);
+    }
+  });
+
+</script>
